@@ -1,11 +1,9 @@
-package com.example.muhammad.currency_exchange.controller;
+package com.muhammad.microservices.currency_exchange.controller;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
-import com.example.muhammad.currency_exchange.dao.CurrencyExchangeRepository;
-import com.example.muhammad.currency_exchange.dto.CurrencyExchange;
-import com.example.muhammad.currency_exchange.services.CurrencyExchangeService;
+import com.muhammad.microservices.currency_exchange.dto.CurrencyExchange;
+import com.muhammad.microservices.currency_exchange.services.CurrencyExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

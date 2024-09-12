@@ -1,7 +1,7 @@
-package com.example.muhammad.currency_exchange.services;
+package com.muhammad.microservices.currency_exchange.services;
 
-import com.example.muhammad.currency_exchange.dao.CurrencyExchangeRepository;
-import com.example.muhammad.currency_exchange.dto.CurrencyExchange;
+import com.muhammad.microservices.currency_exchange.dao.CurrencyExchangeRepository;
+import com.muhammad.microservices.currency_exchange.dto.CurrencyExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
