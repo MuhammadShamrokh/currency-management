@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 
 @RestController
 public class CurrencyExchangeController {
-    private Environment environment;
+    private final Environment environment;
 
     @Autowired
     public CurrencyExchangeController(Environment environment) {
@@ -24,7 +24,7 @@ public class CurrencyExchangeController {
         CurrencyExchange currencyExchange = new CurrencyExchange(1000L, from, to, BigDecimal.valueOf(3.7));
         // retrieving server port from environment instance
         String port = environment.getProperty("local.server.port");
-        currencyExchange.setEnviroment(port);
+        currencyExchange.setEnvironment(port);
 
         return currencyExchange;
     }

@@ -1,15 +1,29 @@
 package com.example.muhammad.currency_exchange.dto;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "currency_exchange")
 public class CurrencyExchange {
+    @Id
+    @Column(name = "id")
     private Long id;
+    @Column(name = "currency_from")
     private String from;
+    @Column(name = "currency_to")
     private String to;
+    @Column(name = "conversion_multiple")
     private BigDecimal conversionMultiple;
-    private String enviroment;
+    @Column(name = "environment")
+    private String environment;
 
     public CurrencyExchange() {
+
     }
 
     public CurrencyExchange(Long id, String from, String to, BigDecimal conversionMultiple) {
@@ -51,12 +65,12 @@ public class CurrencyExchange {
         this.conversionMultiple = conversionMultiple;
     }
 
-    public String getEnviroment() {
-        return enviroment;
+    public String getEnvironment() {
+        return environment;
     }
 
-    public void setEnviroment(String enviroment) {
-        this.enviroment = enviroment;
+    public void setEnvironment(String environment) {
+        this.environment = environment;
     }
 
     @Override
