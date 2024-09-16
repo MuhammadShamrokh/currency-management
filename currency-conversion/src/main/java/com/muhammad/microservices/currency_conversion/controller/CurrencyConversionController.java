@@ -1,28 +1,21 @@
 package com.muhammad.microservices.currency_conversion.controller;
 
 import com.muhammad.microservices.currency_conversion.dto.CurrencyConversion;
-import org.springframework.http.ResponseEntity;
+import com.muhammad.microservices.currency_conversion.proxy.CurrencyExchangeProxy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+
 
 @RestController
 public class CurrencyConversionController {
-    private final RestTemplate restTemplate;
+    private final CurrencyExchangeProxy currencyExchangeProxy;
 
-    public CurrencyConversionController() {
-        restTemplate = new RestTemplate();
-    }
-
-
-    @GetMapping("/hello")
-    public String sayHello(){
-        return "Hello-World";
+    @Autowired
+    public CurrencyConversionController(CurrencyExchangeProxy currencyExchangeProxy) {
+        this.currencyExchangeProxy = currencyExchangeProxy;
     }
 
     @GetMapping(path = "/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
@@ -30,20 +23,8 @@ public class CurrencyConversionController {
                                                           @PathVariable String to,
                                                           @PathVariable BigDecimal quantity){
 
-        // preparing query params for the request
-        Map<String, String> queryParams = new HashMap<>();
-        queryParams.put("from", from);
-        queryParams.put("to", to);
-
-        // sending the request
-        ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity(
-                "http://localhost:8000/currency-exchange/from/{from}/to/{to}",
-                CurrencyConversion.class,
-                queryParams
-        );
-
-        // extracting the response body content
-        CurrencyConversion currencyConversion = responseEntity.getBody();
+        // sending request using CurrencyExchangeProxy
+        CurrencyConversion currencyConversion = currencyExchangeProxy.retrieveCurrencyExchangeValue(from,to);
 
         // setting the missing values for currencyConversion
         currencyConversion.setQuantity(quantity);
