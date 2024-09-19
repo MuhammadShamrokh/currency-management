@@ -8,9 +8,11 @@
 		<version>3.3.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<!-- GAV -->
 	<groupId>com.example.muhammad</groupId>
 	<artifactId>currency-exchange</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>currency-exchange</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -26,9 +28,11 @@
 		<tag/>
 		<url/>
 	</scm>
+	<!-- Properties -->
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.3</spring-cloud.version>
+		<dockerhub-repository>muhammadshamrokh</dockerhub-repository>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -104,6 +108,20 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name> ${dockerhub-repository}/${project.artifactId}:${project.version}</name>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-image</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
